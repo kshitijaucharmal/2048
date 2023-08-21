@@ -1,4 +1,3 @@
-#include <cstdarg>
 #include <cstdio>
 #include <iostream>
 #include <raylib.h>
@@ -6,6 +5,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
+
+#define SHOWBLOCKS
 
 class Block{
 private:
@@ -88,7 +89,6 @@ public:
         // TextPos = {pos.x + (float)cell_size/2, pos.y + (float)cell_size/2};
         Empty = empty;
         if(Empty) Value = 0;
-
     }
 
     void Show(Font font){
@@ -286,17 +286,21 @@ int main(void){
         BeginDrawing();
         ClearBackground((Color){187, 173, 160, 255});
         
+#ifdef SHOWBLOCKS
         // Show all blocks
         for(int i = 0; i < Board.size(); i++){
             for(int j = 0; j < Board[0].size(); j++){
                 Board[i][j].Show(robaga);
             }
         }
+#endif
 
+#ifdef SHOWSCORE
         std::stringstream ss;
         ss << "Score : ";
         ss << score;
         DrawText(ss.str().c_str(), 150, 180, 20, GRAY);
+#endif
 
         EndDrawing();
     }
